@@ -4,7 +4,15 @@ const orderRoutes = require('./routes/order');
 const analiticsRoutes = require('./routes/analitics');
 const categoryRoutes = require('./routes/category');
 const positionRoutes = require('./routes/position');
+const keys = require('./config/keys');
+const mongoose = require('mongoose');
 const app = express();
+
+//подключаемся к базе данных
+mongoose.connect(keys.mongoURI)
+    .then(() => console.log('Database connected...'))
+    .catch((error) => console.error(error));
+
 //подключаем библиотеку body-parser
 const bodyParser = require('body-parser');
 //детализирует все запросы в терминале
