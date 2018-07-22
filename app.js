@@ -4,6 +4,7 @@ const orderRoutes = require('./routes/order');
 const analiticsRoutes = require('./routes/analitics');
 const categoryRoutes = require('./routes/category');
 const positionRoutes = require('./routes/position');
+const passport = require('passport');
 const keys = require('./config/keys');
 const mongoose = require('mongoose');
 const app = express();
@@ -12,6 +13,11 @@ const app = express();
 mongoose.connect(keys.mongoURI)
     .then(() => console.log('Database connected...'))
     .catch((error) => console.error(error));
+
+//Инициализируем passport для нашего приложения
+app.use(passport.initialize());
+//подключаем файл где описан логика авторизации
+require('./middleware/passport')(passport);
 
 //подключаем библиотеку body-parser
 const bodyParser = require('body-parser');
