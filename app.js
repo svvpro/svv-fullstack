@@ -23,6 +23,8 @@ require('./middleware/passport')(passport);
 const bodyParser = require('body-parser');
 //детализирует все запросы в терминале
 app.use(require('morgan')('dev'));
+//данная конструкция позволяет получать доступ к файлам в напрямую
+app.use('/uploads', express.static('uploads'));
 //декодируем входящий url
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
